@@ -36,6 +36,9 @@ const Form = styled.form`
       border-color: var(--red);
     }
   }
+  textarea {
+    resize: vertical;
+  }
   button,
   input[type='submit'] {
     width: auto;

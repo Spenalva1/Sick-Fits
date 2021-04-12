@@ -3,3 +3,4 @@ build
 .vercel
 backend/.env
 backend/.keystone
+frontend/.next
