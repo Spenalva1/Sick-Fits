@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
+import SingleProduct from '../../components/SingleProduct'
 
-const SingleProduct = ({ query: { id } }) => <p>Post: {id}</p>;
+const singleProductPage = ({ query: { id } }) => <SingleProduct id={id} />;
 
 SingleProduct.propTypes = {
   query: PropTypes.any,
 };
 
-export default SingleProduct;
+export default singleProductPage;
