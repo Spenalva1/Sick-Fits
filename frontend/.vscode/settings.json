@@ -16,6 +16,7 @@
     "statusBarItem.hoverBackground": "#cc9e00"
   },
   "editor.formatOnSave": true,
+  "editor.tabSize": 2,
   "[javascript]": {
     "editor.formatOnSave": false
   },
