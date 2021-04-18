@@ -1,62 +1,56 @@
+import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import Form from './styles/Form';
 import useForm from '../lib/useForm';
-import { CURRENT_USER_QUERY } from './User';
 import DisplayError from './ErrorMessage';
 
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION(
-    $name: String!
+const RESET_MUTATION = gql`
+  mutation RESET_MUTATION(
     $email: String!
+    $token: String!
     $password: String!
   ) {
-    createUser(data: { name: $name, email: $email, password: $password }) {
-      id
-      email
-      name
+    redeemUserPasswordResetToken(
+      email: $email
+      token: $token
+      password: $password
+    ) {
+      message
+      code
     }
   }
 `;
 
-const SignUp = () => {
+const RequestReset = ({ token }) => {
   const { inputs, handleChange, resetForm } = useForm({
     email: '',
-    name: '',
     password: '',
+    token: '',
   });
-  const [signUp, { data, error, loading }] = useMutation(SIGNUP_MUTATION, {
-    variables: { ...inputs },
+  const [reset, { data, error, loading }] = useMutation(RESET_MUTATION, {
+    variables: { ...inputs, token },
   });
-  const handleSubmit = (e) => {
+  console.log({ data, error, loading });
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    resetForm();
-    signUp().catch((error) => {
+    try {
+      await reset();
+      resetForm();
+      console.log(data);
+    } catch (error) {
       console.log('Error ->', error);
-    });
+    }
   };
   return (
     <Form method="POST" onSubmit={handleSubmit}>
-      <h2>Sign Up For an Account</h2>
+      <h2>Reset Your password</h2>
       <fieldset disabled={loading} aria-busy={loading}>
-        {data?.createUser && (
-          <p>
-            Signed Up with {data.createUser.email} - Please Go Head and Sign In!
-          </p>
+        {data?.redeemUserPasswordResetToken === null && (
+          <p>Success! You can now sign in!</p>
         )}
         <DisplayError error={error} />
-        <DisplayError error={data?.authenticateUserWithPassword} />
-        <label htmlFor="name">
-          Name
-          <input
-            type="name"
-            name="name"
-            placeholder="Your Name"
-            autoComplete="name"
-            value={inputs.name}
-            onChange={handleChange}
-          />
-        </label>
+        <DisplayError error={data?.redeemUserPasswordResetToken} />
         <label htmlFor="email">
           Email
           <input
@@ -79,10 +73,14 @@ const SignUp = () => {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button type="submit">Request Reset</button>
       </fieldset>
     </Form>
   );
 };
 
-export default SignUp;
+RequestReset.propTypes = {
+  token: PropTypes.string.isRequired,
+};
+
+export default RequestReset;

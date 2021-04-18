@@ -1,6 +1,6 @@
 import UpdateProduct from '../components/UpdateProduct';
 
-const updatePage = ({ query: {id} }) => (
+const updatePage = ({ query: { id } }) => (
   <div>
     <UpdateProduct id={id} />
   </div>
