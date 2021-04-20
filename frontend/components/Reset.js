@@ -31,13 +31,11 @@ const RequestReset = ({ token }) => {
   const [reset, { data, error, loading }] = useMutation(RESET_MUTATION, {
     variables: { ...inputs, token },
   });
-  console.log({ data, error, loading });
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await reset();
       resetForm();
-      console.log(data);
     } catch (error) {
       console.log('Error ->', error);
     }

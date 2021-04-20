@@ -61,7 +61,6 @@ const CreateProduct = () => {
               createProduct: { id },
             },
           } = await createProduct();
-          console.log(id);
           clearForm();
           router.push({
             pathname: `/product/${id}`,
