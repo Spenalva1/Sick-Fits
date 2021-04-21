@@ -17,7 +17,7 @@ const CartItemStyles = styled.li`
 `;
 
 const CartItem = ({ item: { quantity, id, product } }) => {
-  if (!id) return null;
+  if (!id || quantity <= 0) return null;
   return (
     <CartItemStyles>
       <img

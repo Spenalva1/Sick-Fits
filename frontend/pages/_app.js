@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { ApolloProvider } from '@apollo/client';
 import withData from '../lib/withData';
 import Page from '../components/Page';
+import { CartStateProvider } from '../lib/cartState';
 
 import '../components/styles/nprogress.css';
 
@@ -13,10 +14,12 @@ Router.events.on('routeChangeError', () => NProgress.done());
 
 const MyApp = ({ Component, pageProps, apollo }) => (
   <ApolloProvider client={apollo}>
-    <Page>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <Component {...pageProps} />
-    </Page>
+    <CartStateProvider>
+      <Page>
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        <Component {...pageProps} />
+      </Page>
+    </CartStateProvider>
   </ApolloProvider>
 );
 
