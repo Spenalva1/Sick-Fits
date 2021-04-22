@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import { CURRENT_USER_QUERY } from './User';
-import { useCart } from '../lib/cartState';
 
 const ADD_TO_CART_MUTATION = gql`
   mutation ADD_TO_CART_MUTATION($productId: ID!) {
