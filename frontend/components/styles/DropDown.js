@@ -8,6 +8,7 @@ const DropDown = styled.div`
 `;
 
 const DropDownItem = styled.div`
+  cursor: pointer;
   border-bottom: 1px solid var(--lightGray);
   background: ${(props) => (props.highlighted ? '#f7f7f7' : 'white')};
   padding: 1rem;
@@ -19,6 +20,12 @@ const DropDownItem = styled.div`
     ${(props) => (props.highlighted ? props.theme.lightgrey : 'white')};
   img {
     margin-right: 10px;
+  }
+
+  &:hover {
+    background: #f7f7f7;
+    padding-left: 2rem;
+    border-left: 10px solid var(--grey);
   }
 `;
 
