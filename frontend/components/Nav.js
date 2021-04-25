@@ -9,7 +9,10 @@ const Nav = () => {
   const user = useUser();
   const { openCart } = useCart();
   const cartCount = user
-    ? user.cart.reduce((prev, item) => prev + item.quantity, 0)
+    ? user.cart.reduce(
+        (prev, item) => prev + (item.quantity ? item.quantity : 0),
+        0
+      )
     : 0;
   return (
     <NavStyles>

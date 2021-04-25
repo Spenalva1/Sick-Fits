@@ -31,12 +31,9 @@ const Search = () => {
   resetIdCounter();
   const router = useRouter();
 
-  const [search, { data, error, loading }] = useLazyQuery(
-    SEARCH_PRODUCTS_QUERY,
-    {
-      fetchPolicy: 'no-cache',
-    }
-  );
+  const [search, { data, loading }] = useLazyQuery(SEARCH_PRODUCTS_QUERY, {
+    fetchPolicy: 'no-cache',
+  });
   const searhSometimes = debounce(search, 350);
 
   const items = data?.searchTerms || [];
