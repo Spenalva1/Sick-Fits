@@ -8,6 +8,23 @@ export const CURRENT_USER_QUERY = gql`
         id
         email
         name
+        orders {
+          id
+          total
+          charge
+          items {
+            id
+            name
+            description
+            price
+            quantity
+            photo {
+              image {
+                publicUrlTransformed
+              }
+            }
+          }
+        }
         cart {
           id
           quantity

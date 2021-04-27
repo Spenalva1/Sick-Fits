@@ -3,7 +3,7 @@ import SingleProduct from '../../components/SingleProduct';
 
 const singleProductPage = ({ query: { id } }) => <SingleProduct id={id} />;
 
-SingleProduct.propTypes = {
+singleProductPage.propTypes = {
   query: PropTypes.any,
 };
 

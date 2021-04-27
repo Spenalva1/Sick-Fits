@@ -1,3 +1,5 @@
-const ordersPage = () => <h1>hola orders</h1>;
+import Orders from '../components/Orders';
+
+const ordersPage = () => <Orders />;
 
 export default ordersPage;
